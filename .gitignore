@@ -31,3 +31,7 @@ node_modules
 
 #Obsolete
 ignore
+
+
+#compiled node
+nodesrc

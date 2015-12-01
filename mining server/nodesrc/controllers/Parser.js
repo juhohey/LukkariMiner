@@ -1,4 +1,4 @@
-/*
+/**
 * Parser
 * @desc Parses DOM strings
 */
@@ -8,15 +8,19 @@ let weekFact = require(__dirname+"/week");
 let Pattern = require(__dirname+"/pattern");
 
 let Parser = function( ) {
+
     //this
     let parser = {};
 
-    /*
+    /**
     * Initial parse,  parse campus html page
-    * @param mined html
-    * @param selector to find in html
+     * @param DOM mined html
+     * @param selector to find in html
+     * @param element to find in html
+     * @param attributes to find in html
+     * @param url mined
      */
-    parser.parseLinks = function(DOM, selector, element, attributes, url,minedPages){
+    parser.parseLinks = function(DOM, selector, element, attributes, url){
 
         let parsed = {
             links: parser.parseZ(DOM).selector(selector).find(element).attr(attributes),
@@ -73,21 +77,24 @@ let Parser = function( ) {
         killMimosa(parsed.links);
         return parsed;
 
-    };
+        //Remove links with /mimosa/
+        function killMimosa(arr){
 
-    function killMimosa(arr){
-
-        for(let i = 0;i<arr.length;i++){
-            if (arr[i].href.indexOf(Pattern.mimosa) >-1){
-                delete arr[i];
-                return;
+            for(let i = 0;i<arr.length;i++){
+                if (arr[i].href.indexOf(Pattern.mimosa) >-1){
+                    delete arr[i];
+                    return;
+                }
             }
         }
-    }
-    /*
+    };
+
+
+    /**
     * Parse header
     * @param DOM
-     */
+    * @param isRelevant is this week relevant
+    */
     parser.parseHeader = function(DOM, isRelevant){
 
         let headerText = $(DOM).find(Pattern.selector.header).text();
@@ -112,8 +119,9 @@ let Parser = function( ) {
         }
     };
 
-    /*
+    /**
     * Parse timetables...
+     * @param DOM
      */
     parser.parseTimeTable = function(DOM){
 
@@ -140,17 +148,16 @@ let Parser = function( ) {
         return week;
     };
 
-    /*
-     * Parser actual, pipe methods <3
+    /**
+     * Parser actual, pipe methods
      * @param: a mined DOM
-     *   .find()
-     *   @param selector to find in dom
+     * TODO this is still a mess
      */
     parser.parseZ = function(DOM){
 
         let setTobeParsed = DOM;
         return {
-            selector : function(selectorArg) { //console.log("parser find");
+            selector : function(selectorArg) {
 
                 let initialDom = $(setTobeParsed).find(selectorArg);
                 return {
@@ -162,7 +169,7 @@ let Parser = function( ) {
 
                                 let elementList = [];
                                 //find attributes from element
-                                for(let key in initialDom){  //console.log(initialDom[key]);
+                                for(let key in initialDom){
                                     if(initialDom.hasOwnProperty(key)){
                                         if(initialDom[key].name===el) {
 
@@ -171,7 +178,7 @@ let Parser = function( ) {
                                             for(let i = 0;i<attributes.length;i++){
                                                 //set to null if doesn't have
                                                 elemn[attributes[i]] = initialDom[key].attribs ? initialDom[key].attribs[attributes[i]] : null;
-                                                elemn.name= $(initialDom[key]).text(); /*initialDom[key].children[0].data */
+                                                elemn.name= $(initialDom[key]).text();
                                             }
                                             elementList.push(elemn);
                                         }

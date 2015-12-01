@@ -43,7 +43,7 @@ let MinerCtrl = function(){
      * PRIVATE FUNCTIONS
      */
 
-    /*
+    /**
     * Get data from the DB and assign references to mongo object ids for reference
     * @param target name to save
     * @param target object to save - pass by reference
@@ -64,7 +64,7 @@ let MinerCtrl = function(){
         });
     };
 
-    /*
+    /**
     * Handle class id references
      */
     let getClassIds = function(cb){
@@ -83,7 +83,7 @@ let MinerCtrl = function(){
         getDataSaveName(targetModel, classId, cb);
     };
 
-    /*
+    /**
      * Mines a single layer
      * @param url to request
      * @param cb
@@ -125,7 +125,7 @@ let MinerCtrl = function(){
         });
     };
 
-    /*
+    /**
     * Mine a page
     * @param url to mine
     * @param cb
@@ -139,7 +139,7 @@ let MinerCtrl = function(){
 
 
 
-    /*
+    /**
     * Request layers until a classList is found
      */
     let classListActive = false;
@@ -165,9 +165,10 @@ let MinerCtrl = function(){
         });
     }
 
-    /*
+    /**
      * Handle initial request
-     * @param list of campuses
+     * @param campuses, list of campuses
+     * @param cb
      */
     function handleCampuses(campuses, cb){
 
@@ -179,9 +180,11 @@ let MinerCtrl = function(){
         });//save all campuses
     }
 
-    /*
-     * Handle Classlist request
-     * @param list of clasees
+    /**
+     * Handle Class list request
+     * @param layer of mined
+     * @param pages to be mined
+     * @param i how deep are we in the mining hierarchy
      */
     function handleClasses(layer, pages, i){
 
@@ -201,10 +204,11 @@ let MinerCtrl = function(){
         });
     }
 
-    /*
+    /**
     * This request is a class list and has the schedules inside
-    * Mine em!
-     */
+    * @param pagesToBeMinedArg from request still to be mined
+    * @param i how deep are we in the mining list recursion
+    */
     function requestIsClasses(pagesToBeMinedArg,i){
 
         i +=1;
@@ -262,7 +266,7 @@ let MinerCtrl = function(){
         });
     }
 
-    /*
+    /**
     * Save each campus
     * @desc Async for loop
      */
@@ -279,7 +283,7 @@ let MinerCtrl = function(){
         else cb();
     }
 
-    /*
+    /**
      * Save each class
      * @desc Async for loop
      */
@@ -296,7 +300,7 @@ let MinerCtrl = function(){
         else cb();
     }
 
-    /*
+    /**
      * Save each week
      * @desc Async for loop
      */
@@ -316,7 +320,7 @@ let MinerCtrl = function(){
         else cb();
     }
 
-    /*
+    /**
     * Makes objects to save to DB
     * @param name of this DB entry
     * @return obj
@@ -331,7 +335,7 @@ let MinerCtrl = function(){
         };
     }
 
-    /*
+    /**
     * Save campus to DB
      */
     function saveCampus(name, target, cb){
@@ -346,7 +350,7 @@ let MinerCtrl = function(){
         });
     }
 
-    /*
+    /**
      * Save class to DB
      */
     function saveClass(name, target, cb){
@@ -363,7 +367,7 @@ let MinerCtrl = function(){
         });
     }
 
-    /*
+    /**
      * Save week to DB
      */
     function saveWeek(week, className, campusName, cb){
@@ -381,7 +385,7 @@ let MinerCtrl = function(){
         });
     }
 
-    /*
+    /**
      * Schema for weeks
      * TODO: put this in somewhere else
      */
@@ -428,7 +432,7 @@ let MinerCtrl = function(){
 
             });
 
-        });//start:1
+        });//start
     };
 
     return miner;

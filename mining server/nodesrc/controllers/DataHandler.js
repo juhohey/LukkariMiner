@@ -1,5 +1,5 @@
 
- /*
+/**
 * DataHandler
 * @desc handles data, gets data from and saves data to mongo
 */
@@ -23,11 +23,12 @@ let DataHandler = function( ) {
         campusClass: CampusClassSchema
     };
 
-    /*
+    /**
     * Primary function
     * @desc 1) updates data if exits 2) creates entry if not
-    * @para data to save
-    * @param model name
+    * @param data to save
+    * @param target model model name
+      @param model if no target model the model to be used
     * @param cb
      */
     dataHandler.save = function(data, target, model, cb){
@@ -53,10 +54,10 @@ let DataHandler = function( ) {
         });
     };
 
-    /*
+    /**
      * Create model - save it
      * @para data to save
-     * @param model name
+     * @param target model name
      * @param schema to use
      * @param cb
      */
@@ -68,7 +69,7 @@ let DataHandler = function( ) {
         dataHandler.save(data, null, model, cb);
     };
 
-    /*
+    /**
     * Save single week
     * TODO refactor and combine to other method
      */
@@ -100,9 +101,9 @@ let DataHandler = function( ) {
         models[name] = SchemaCreator.create(fields, refKey, refVal);
     };
 
-    /*
+    /**
     * Get data
-    * @param what collection
+    * @param model what collection
     * @param cb
      */
     dataHandler.get = function(model, cb){
