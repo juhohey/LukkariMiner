@@ -30,7 +30,8 @@ let Requester = function() {
                 }
                 else {
                     //For windows & ä ö å | I don't know why uft-8 doesn't work
-                    let bodyUtf = iconv.decode(body, 'win1252');
+                    let bodyUtf = iconv.decode(body, 'win1252');body
+                   // console.log(bodyUtf);
                     cb(null, bodyUtf);
                 }
             });
