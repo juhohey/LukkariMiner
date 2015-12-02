@@ -1,0 +1,62 @@
+/*
+* gemeral.css
+*/
+
+@import "_variables.css";
+
+
+/* General override properties */
+
+/*	Display properties	*/
+.dib{
+	display: inline-block;
+}
+.dn{
+	display: none;
+}
+.db{
+	display: block;
+}
+
+/* margins */
+.m-1{
+	margin: 1rem;
+}
+.m-tb-1{
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+.m-lr-1{
+	margin-left: 1rem;
+	margin-right: 1rem;
+}
+
+/* padding */
+.p-1{
+	padding: 1rem;
+}
+.p-v-1{
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+}
+.p-h-1{
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+
+/*Font properties */
+.font-size-normal{
+	font-size: $font_size_body;
+}
+.font-size-sm{
+	font-size: $font_size_sm;
+}
+.font-highlight{
+	color: $color_base;
+}
+
+/* cursor properties */
+.pointer{
+	cursor: pointer;
+}

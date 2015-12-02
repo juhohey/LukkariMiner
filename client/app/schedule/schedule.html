@@ -1,0 +1,37 @@
+<section class="schedules section" ng-controller="scheduleCtrl as scheduleVm">
+
+    <div class="schedules-table">
+        <md-grid-list
+                md-cols-gt-md="6" md-cols-sm="6" md-cols-md="6"
+                md-row-height-gt-md="1:1" md-row-height="1:1"
+                md-gutter-gt-md="16px" md-gutter-gt-sm="8px" md-gutter="4px">
+                <md-grid-tile class="schedules-item-time" md-rowspan="1" md-colspan="1">
+
+                </md-grid-tile>
+                <md-grid-tile class="schedules-item-date" md-rowspan="1" md-colspan="1"  ng-repeat='d in ["m","t","w","th","f"]'>
+                    {{::d}}
+                </md-grid-tile>
+
+        </md-grid-list>
+        <div class="schedules-item" ng-repeat="scheduleItem in scheduleVm.scheduleItem.schedule">
+            <md-grid-list
+                    md-cols-gt-md="6" md-cols-sm="6" md-cols-md="6"
+                    md-row-height-gt-md="1:1" md-row-height="1:1"
+                    md-gutter-gt-md="16px" md-gutter-gt-sm="8px" md-gutter="4px">
+                <!-- individual row -->
+                    <!-- time slot -->
+                    <md-grid-tile class="schedules-item-time" md-rowspan="2" md-colspan="1">
+                        {{::scheduleItem.time.text}}
+                    </md-grid-tile>
+                    <!-- days -->
+                        <md-grid-tile   md-colspan-sm="1"  md-rowspan="2"  ng-repeat="days in scheduleItem.slots" md-colspan="1">
+                            <!--<md-grid-tile-header>
+                                {{::days.day}}
+                            </md-grid-tile-header>-->
+                                {{::days.text}}
+<!--                            </md-grid-tile-footer>-->
+                        </md-grid-tile>
+            </md-grid-list>
+        </div>
+    </div>
+</section>

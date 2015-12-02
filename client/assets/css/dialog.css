@@ -1,0 +1,64 @@
+/*
+* dialog.css
+*/
+
+@import "_variables.css";
+.dialog{
+	height: 100%;
+    width: 100%;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    text-align: center;
+    z-index: -1;
+    transition:all 0.3s;
+    visibility: hidden;  
+    opacity: 0;
+	text-align: left;
+	&-overlay{ 
+		position: absolute;
+		top: 0;
+		left: 0;
+		background-color: rgb(216, 87, 87);
+		height: 100%;
+		width: 100%;
+		background-color: rgba(0,0,0,0.6);
+	}
+	&.active{
+    	z-index: 10;
+    	visibility: visible;
+    	opacity: 1;
+    }
+    &-content{
+    	position: absolute;
+    	top: 30%;
+	    background-color: white;
+	    /*width: 80%;*/
+	    left: 50%;
+   		transform: translateX(-50%);
+	    padding: 1.8rem;
+	    box-shadow: $box_shadow_1; 
+	    border-radius: 2%;
+	    &-head{
+	    	margin-bottom: 2rem;
+	    }
+	    .icon{
+	    	transition: all 0.3s ease;
+	    	font-size: 2rem;
+   			margin: 8%;
+   			display: inline-block;
+	    }
+
+    }
+    &-label{
+    	font-size:1.15em;
+    	margin-bottom: 1rem;
+    }
+    &-options{
+    	text-align: right;
+    }
+    &-error{
+    	margin: 2rem 0 1rem;
+    }
+}

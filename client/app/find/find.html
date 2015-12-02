@@ -1,0 +1,18 @@
+<section class="find" ng-controller="findCtrl as find">
+    <div class="inputs">
+
+        <div class="input-instance">
+            <md-datepicker ng-model="find.date" md-placeholder="Enter date"></md-datepicker>
+        </div>
+        <md-list-item class="md-2-line">
+            <md-icon md-svg-icon="communication:phone"><label>Class</label></md-icon>
+            <div class="md-list-item-text">
+                <auto-fill auto-fill-vm="find" auto-fill-vm-src="campuses" auto-fill-keys="name"  auto-fill-vm-cb="selectCampusOrClass" ></auto-fill>
+            </div>
+        </md-list-item>
+        <md-list-item class="secondary-button-padding">
+            <p></p>
+            <md-button ng-click="find.findSchedule()">Find</md-button>
+        </md-list-item>
+    </div>
+</section>

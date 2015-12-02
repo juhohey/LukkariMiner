@@ -1,0 +1,41 @@
+/*
+* button.css
+*/
+
+@import "_variables.css";
+.btn{
+	border:0;
+	outline: 0;
+	padding: 0.4rem 0.8rem;
+	background-color: transparent;
+	font-size: $font_size_1;
+	color: $color_base;
+	cursor: pointer;
+	user-select:none;
+	box-shadow: $box_shadow_1;
+	display: inline-block;
+
+	&.active{
+		/*background-color: $mainColor;*/
+	}
+	&-clear{
+		background-color: transparent;
+		box-shadow: none;
+		color: $color_base;
+		&.active{
+			background-color: transparent;
+			color:$color_base_dark;
+		}
+	}
+	&-sm{
+		font-size: $font_size_sm;
+		padding: 0.2rem 0.4rem;
+	}
+	&-warn{
+		background-color:$color_warn;
+		color: white; 
+	}
+}
+.btn + .btn{
+	margin-left: 0.4rem;
+}
