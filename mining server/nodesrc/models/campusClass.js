@@ -1,6 +1,6 @@
 
  /*
-* Model: campus
+* Model: campus class
 */
 
 let mongoose = require("mongoose");
@@ -12,7 +12,5 @@ let CampusClass = new Schema({
     created_at: Date,
     modified_at: Date
 });
-
-//let Model = mongoose.model("Model", myModel);
 
 module.exports = CampusClass;
