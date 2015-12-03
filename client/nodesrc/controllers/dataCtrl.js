@@ -1,24 +1,24 @@
 
- /*
-* Nodemodule
-* @desc Does things
+ /**
+* Data Controller
+* @desc handles interaction with mongo
 */
 let mongoose = require("mongoose");
 
 let modelPath = "../models";
 let Campus = require(modelPath+"/campus");
 
- var uDtrl = function () {
+let DataCtrl = function () {
 
      //this
-     let ctrl = {};
+     let dataCtrl = {};
 
      //map for campus classes weeks
      let models = {};
 
      //list all from passed model
      //@param
-     ctrl.listCampus = function (name,cb){
+     dataCtrl.listCampus = function (name,cb){
 
          if(name){
              Campus.find({"name":name}).exec(function(err, dbData){
@@ -38,7 +38,7 @@ let Campus = require(modelPath+"/campus");
 
      //list all from passed model
      //@param
-     ctrl.listClass = function (campus, cb){
+     dataCtrl.listClass = function (campus, cb){
 
         let m = decodeURI(campus.toLowerCase())+"_classes";
         console.log(m, models[m]);
@@ -50,7 +50,7 @@ let Campus = require(modelPath+"/campus");
 
      //list all from passed model
      //@params
-     ctrl.listCampusWeeks = function (campus, cb){
+     dataCtrl.listCampusWeeks = function (campus, cb){
          let m = decodeURI(campus.toLowerCase())+"_weeks";
 
          models[m].find().exec(function(err, dbData){
@@ -82,10 +82,10 @@ let Campus = require(modelPath+"/campus");
      *  On init build classes / weeks schemas
       */
      (function(){
-        ctrl.listCampus(null, ()=>{});
+        dataCtrl.listCampus(null, ()=>{});
      })();
-     return ctrl;
+     return dataCtrl;
 
  };
 
-module.exports = uDtrl();
+module.exports = DataCtrl();
