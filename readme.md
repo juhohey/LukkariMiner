@@ -8,3 +8,8 @@ This is build on MEAN using ES6.
 
 * Mining server
 * Client ng-app & API
+
+##About
+
+Still heavy in development but the mining server is done.
+No constructor functions or classes, just factories.
