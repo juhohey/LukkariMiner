@@ -5,7 +5,7 @@
 
 angular.module(APPNAME).factory("dataFact",dataFact);
 
-//dataFact.$inject = [""]
+dataFact.$inject = ["httpFact, $q, $timeout"];
 
 function dataFact(httpFact, $q, $timeout){
 
@@ -89,6 +89,10 @@ function dataFact(httpFact, $q, $timeout){
      Getters
      */
 
+     /*
+     * Parse a week's data based on selected date & class name
+     * @param seachModel obj - .weekNumber: .name: 
+     */
     dataF.getWeekData = function(seachModel){
 
         let w = new Date(date).getWeek();

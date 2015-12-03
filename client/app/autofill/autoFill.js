@@ -1,7 +1,6 @@
 
-/*
-* @juhohey 26.11.2015 - angular 1.4
-* Auto fill
+/**
+* Auto fill | Note this is redundant since we're using ng-material
 * @desc *Auto fills searches*
 * @param: auto-fill-vm: vm to target
 * @param: auto-fill-src: a property of vm to search
@@ -11,15 +10,17 @@
 
 angular.module(APPNAME).directive("autoFill",autoFill);
 
-//autoFill.$inject = [""]
+autoFill.$inject = ["$compile"];
 
 function autoFill($compile){
+
 	return{
 		scope:"=",
 		link:linkFunc,
 		template:"",
 		restrict:"E"
 	};
+
 	function linkFunc(scope,element,attrs) {
 
         let vm = scope[attrs.autoFillVm];
@@ -159,37 +160,5 @@ function autoFill($compile){
             }
 
         }
-         /*
-         else scope.outputs ={};
-         }*/
-        /*
-        function searchByModel () {
-            if (scope.searchModel.length>0) {
-                if (!scope.outputs) {scope.outputs = {}};
-                searchObj(false,["personal"]);
-                searchObj(true,scope.keys);
-            }
-            else scope.outputs ={};
-        }
-        function searchObj (inner, props) {
-            searchThis = inner ? scope.main.sections : scope.main;
-            for (var i = 0; i < props.length; i++) {
-                for(var k in searchThis[props[i]].content){
-                    if(searchThis[props[i]].content[k].value){
-                        if (checkThis(searchThis[props[i]].content[k],"value")||checkThis(searchThis[props[i]].content[k],"label")) {
-                            //console.log("MATCH",scope.main[props[i]].content[k]);
-
-                            scope.outputs[k] = searchThis[props[i]].content[k];
-                        }
-                        else{
-                            if (scope.outputs[k]) delete scope.outputs[k];
-                        }
-                    };
-                };
-            };
-        };
-        function checkThis (obj,prop) {
-            return obj[prop].toLowerCase().indexOf(scope.searchModel.toLowerCase())>-1;
-        }*/
 	}
 }

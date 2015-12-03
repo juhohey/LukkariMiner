@@ -33,9 +33,4 @@ node_modules
 ignore
 
 
-#compiled node
-nodedist
-
 DEPRECATED
-
-dist
