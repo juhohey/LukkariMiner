@@ -7,6 +7,7 @@ This is built with angular & a node API.
 ```
 npm install
 gulp dependencies
+run babel-run.bat once to compile /nodesrc to /nodedist
 ```
 
 ##Developing
