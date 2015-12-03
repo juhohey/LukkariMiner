@@ -1,16 +1,14 @@
 /**
- * Created by admin on 26.11.2015.
- */
-/*
-* ng-factory
+* Http factory
+* @desc communicates with the API
 */
 angular.module(APPNAME).factory("httpFact",httpFact);
 
-//factoryA.$inject = [""]
+factoryA.$inject = ["$http"]:
 
 function httpFact($http){
 
-	let httpF = {};
+    let httpF = {};
 
     let apiAddr = "/api";
 
@@ -23,7 +21,7 @@ function httpFact($http){
         return $http.get(apiAddr+route);
     };
 
-	return httpF;
+    return httpF;
 }
 
 
