@@ -1,11 +1,10 @@
-
- /*
+ /**
 * Utility functions
 */
 
-let MyModule = function( ) {
+let Utils = function( ) {
     //this
-    let myModule = {};
+    let utlis = {};
 
     //Week lookup for date
     Date.prototype.getWeek = function() {
@@ -13,7 +12,7 @@ let MyModule = function( ) {
         return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
     };
 
-    return myModule;
+    return utlis;
 };
 
-module.exports = MyModule();
+module.exports = Utils();
