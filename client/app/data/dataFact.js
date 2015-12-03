@@ -89,7 +89,7 @@ function dataFact(httpFact, $q, $timeout){
      Getters
      */
 
-     /*
+     /**
      * Parse a week's data based on selected date & class name
      * @param seachModel obj - .weekNumber: .name: 
      */

@@ -1,13 +1,10 @@
-/**
- * Created by admin on 26.11.2015.
- */
 /*
-* ng-controller
+* Find Controller
 */
 
-angular.module("lukkari").controller("findCtrl",findCtrl);
+angular.module(APPNAME).controller("findCtrl",findCtrl);
 
-//findCtrl.$inject = [""]
+findCtrl.$inject = ["dataFact,scheduleFact, $state"];
 
 function findCtrl(dataFact,scheduleFact, $state){
 
@@ -15,26 +12,16 @@ function findCtrl(dataFact,scheduleFact, $state){
     let vm = this;
 
     //INIT
+    //get campus & classes data
     (function(){
-        dataFact.init();
         dataFact.getCampusData().then((data)=>{
             vm.campuses = data;
 
-           /* dataFact.getCampusWeeks().then((data)=>{
-                vm.weeks = data;
-
-            }).catch((err)=>{
-                console.error(err)
-            })*/
         }).catch((err)=>{
             console.error(err)
         });
 
     })();
-
-    vm.selectCampusOrClass = function(classOrCampus){
-        console.log(classOrCampus);
-    };
 
     //Event listeners
     //THE FIND ACTION
@@ -51,14 +38,6 @@ function findCtrl(dataFact,scheduleFact, $state){
             wn:encodeURI(w.weekNumber)
         });
     };
-
-    //Private
-
-    /*
-    * Parse correct when class & date known
-    * @return week object
-     */
-
 
 }
 

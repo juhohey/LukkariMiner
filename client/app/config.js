@@ -1,7 +1,7 @@
 /*
 *	UI Routes
 */
-angular.module("lukkari").config(states,"states");
+angular.module(APPNAME).config(states,"states");
 states.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 function states ($stateProvider, $urlRouterProvider){
@@ -31,10 +31,3 @@ function states ($stateProvider, $urlRouterProvider){
 				})
 
 }
-
-/*
-//RUN
-angular.module("lukkari").run(init,"init");
-function init(dataFact){
-	dataFact.init();
-}*/

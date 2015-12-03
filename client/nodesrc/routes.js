@@ -3,10 +3,8 @@
 */
 
 let dataCtrl = require("../nodedist/controllers/dataCtrl");
-console.log(__dirname);
-module.exports = function  (app,express) {
 
-	"use strict";
+module.exports = function  (app,express) {
 
 	///MAP FUNCTION
 	//for ez rest routing
@@ -25,32 +23,6 @@ module.exports = function  (app,express) {
 	    }
 	  }
 	};
-
-	// var users = {
-	//   list: function(req, res){
-	//     res.send('user list');
-	//   },
-
-	//   update: function(req, res){
-	//     res.send('user ' + req.params.uid);
-	//   },
-
-	//   delete: function(req, res){
-	//     res.send('delete users');
-	//   },
-
-	//   create: function(req, res){
-	//    	userCtrl.create(req,sss, function (err,dbR,stat) {
-	//    		if (!err) {
-	//    			if(stat){res.status(stat).send(dbR);}
-	//    			else{res.send(dbR);}
-	//    		}
-	//    		else{
-	//    			res.send(err);
-	//    		}
-	//    	});
-	//   }
-	// };
 
 	var index = {
 		list: function(req,res){

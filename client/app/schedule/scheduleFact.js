@@ -1,13 +1,10 @@
 /**
- * Created by admin on 28.11.2015.
- */
-/**
  * Schedule factory
  * @desc store schedule data, get one if not exits
  */
 angular.module(APPNAME).factory("scheduleFact",scheduleFact);
 
-//scheduleFact.$inject = [""]
+scheduleFact.$inject = ["$stateParams, dataFact, $q"];
 
 function scheduleFact($stateParams, dataFact, $q){
 

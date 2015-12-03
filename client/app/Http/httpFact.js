@@ -4,7 +4,7 @@
 /*
 * ng-factory
 */
-angular.module("lukkari").factory("httpFact",httpFact);
+angular.module(APPNAME).factory("httpFact",httpFact);
 
 //factoryA.$inject = [""]
 
