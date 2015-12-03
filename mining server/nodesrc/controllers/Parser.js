@@ -22,6 +22,18 @@ let Parser = function( ) {
      */
     parser.parseLinks = function(DOM, selector, element, attributes, url){
 
+        //Append missing closing </td>'s
+        function fixDom (d) {
+            let dArr = d.split("<td");
+            dArr.forEach((element,index,arr)=>{
+                if(element.match(/<\/td/)!=null) {}
+                else arr[index] = element + "</td>";
+            })
+            //console.log(dArr);
+            return dArr.join("<td");
+        }
+        DOM = fixDom(DOM);
+
         let parsed = {
             links: parser.parseZ(DOM).selector(selector).find(element).attr(attributes),
             week : parser.parseTimeTable(DOM),

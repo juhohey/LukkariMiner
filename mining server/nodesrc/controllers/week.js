@@ -9,6 +9,9 @@ let weekFact = function( ) {
     //this
     let week = {};
 
+    //Amount of days in a week, this changes
+    let amountOfDays = 0;
+
     /*
     * Parse date range & week number from mined array
     * @param mined array
@@ -58,6 +61,9 @@ let weekFact = function( ) {
      */
     week.parseWeek = function(textArray){
 
+        //Find out the amount of days
+        amountOfDays = parseAmountOfDays(textArray);        
+
         //Parse the header
         var weekObject = getHeaderData(textArray);
 
@@ -86,10 +92,11 @@ let weekFact = function( ) {
                 weekTimeSlot.slots.push(
                     { text:Pattern.br, day: dayCounter, reserved:true }
                 );
+                //console.log("Empty inserted");
                 dayCounter ++;
             }
 
-            if(dayCounter===5){
+            if(dayCounter===amountOfDays){
                 startNewSlot();
             }
 
@@ -111,6 +118,8 @@ let weekFact = function( ) {
                 //console.log("item saved",textArray[i]);
                 dayCounter++;
             }
+
+
 
         }
 
@@ -154,8 +163,30 @@ let weekFact = function( ) {
             return obj;
         }
 
+        function parseAmountOfDays(textArrayArg) {
+            
+            for (var i = 0; i < textArray.length; i++) {
+                // is there a sunday string in our array?
+                if(textArray[i].text.toLowerCase().match(/sunday|sunnuntai/gi)!=null) return 7;
+            };
+            return 5;
+
+        };
+
         //Join the objects
         weekObject.schedule = schedule;
+
+        //Test function
+        function testWeek (argument) {
+            for (var i = schedule.length - 1; i >= 0; i--) {
+                console.log("TIME TEXT");
+                console.log(schedule[i].time.text);
+                console.log("*******SLOTS******");
+                console.log(schedule[i].slots);
+            };
+        }
+        testWeek();
+
         return weekObject;
 
     };//parse
