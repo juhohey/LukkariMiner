@@ -7,7 +7,6 @@ var app = express();
 var config = require("./config/data");
 mongoose.connect(config.database); // connect to database
 
-
 app.use(express.static(__dirname+"/dist"));
 //routes
 require("./nodedist/routes")(app,express);
