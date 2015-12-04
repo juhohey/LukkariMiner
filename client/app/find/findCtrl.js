@@ -4,7 +4,7 @@
 
 angular.module(APPNAME).controller("findCtrl",findCtrl);
 
-findCtrl.$inject = ["dataFact,scheduleFact, $state"];
+//sfindCtrl.$inject = ["dataFact,scheduleFact, $state"];
 
 function findCtrl(dataFact,scheduleFact, $state){
 
@@ -40,4 +40,5 @@ function findCtrl(dataFact,scheduleFact, $state){
     };
 
 }
+
 

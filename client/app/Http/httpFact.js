@@ -4,7 +4,7 @@
 */
 angular.module(APPNAME).factory("httpFact",httpFact);
 
-factoryA.$inject = ["$http"]:
+httpFact.$inject = ["$http"];
 
 function httpFact($http){
 
@@ -25,3 +25,4 @@ function httpFact($http){
 }
 
 
+ 

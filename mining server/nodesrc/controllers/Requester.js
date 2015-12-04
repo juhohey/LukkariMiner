@@ -19,9 +19,10 @@ let Requester = function() {
     requester.get = function(url,cb){
         //Wrap requests in a timeout so we wont DOS
         setTimeout(()=> {
-            request(url, {encoding: null}, (err, res, body)=> {
+            
+            console.log("requesting", url);
 
-                console.log("requesting", url);
+            request(url, {encoding: null}, (err, res, body)=> {
 
                 if (err) cb(err, null);
                 else if(res.statusCode==404){

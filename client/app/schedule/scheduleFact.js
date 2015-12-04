@@ -4,7 +4,7 @@
  */
 angular.module(APPNAME).factory("scheduleFact",scheduleFact);
 
-scheduleFact.$inject = ["$stateParams, dataFact, $q"];
+//scheduleFact.$inject = ["$stateParams, dataFact, $q"];
 
 function scheduleFact($stateParams, dataFact, $q){
 

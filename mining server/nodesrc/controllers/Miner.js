@@ -423,8 +423,10 @@ let MinerCtrl = function(){
             //save all campuses, after
             handleCampuses(campusesData.links, ()=>{
 
+                //console.log(campusesData.links);
                 //set all pages to be mined
-                pagesToBeMined = [campusesData.links[0]];
+                //Chech if theres a spesific campus targeted
+                pagesToBeMined = miner.config.campus ? campusesData.links[miner.config.campus] : campusesData.links;
                 //reference to the first campus we're going to mine
                 campusActiveName = campusesData.links[0].name;
                 //start recursion

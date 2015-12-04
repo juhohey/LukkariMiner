@@ -5,7 +5,6 @@
 
 angular.module(APPNAME).factory("dataFact",dataFact);
 
-dataFact.$inject = ["httpFact, $q, $timeout"];
 
 function dataFact(httpFact, $q, $timeout){
 
@@ -100,13 +99,13 @@ function dataFact(httpFact, $q, $timeout){
         //Weeks = all campuses all weeks
         for(let i = 0;i<dataF.weeks.length;i++){
             //Weeks[i] = all weeks from 1 campus
-            for(let j = 0;j<dataF.weeks[i].length;j++){
+            for(let j = 0;j<dataF.weeks[i].length;j++){ 
                 //Weeks[i][j] = data from 1 weeks from 1 campus
                 //Has class:asdasd , weekNumber:49
                 if(dataF.weeks[i][j].class===seachModel.class&&dataF.weeks[i][j].weekNumber===w){
                   // console.log("match!",dataF.weeks[i][j],w);
                     dataF.weeks[i][j].name = seachModel.name;
-
+                    console.log(dataF.weeks[i]);
                     return dataF.weeks[i][j];
 
                 }
@@ -193,7 +192,7 @@ function dataFact(httpFact, $q, $timeout){
     function checkForStatusReturnPromise(p, data, resolve, reject){
         if(promises[p]) resolve(dataF[data]);
         else{
-            $timeout(()=>{
+            $timeout(()=>{  // console.log(campuses);
                 if(promises[p]) resolve(dataF[data]);
                 else reject("API unavailable at this time, so sorry")
             },5000)
@@ -204,7 +203,8 @@ function dataFact(httpFact, $q, $timeout){
     * Assign a campus it's classes
      */
     function parseCampuses(data, k){
-        for(let j = 0;j<dataF.campuses.length;j++){
+        console.log(data);
+        for(let j = 0;j<dataF.campuses.length;j++){ 
             if(dataF.campuses[j]._id === data[0].campus){
                 dataF.campuses[j][k] = data;
             }
@@ -216,3 +216,4 @@ function dataFact(httpFact, $q, $timeout){
 }
 
 
+//dataFact.$inject = ["httpFact, $q, $timeout"];
