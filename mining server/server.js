@@ -1,7 +1,7 @@
 var http = require('http');
 var express = require('express');
 var mongoose = require('mongoose');
-var Miner = require("./nodedist/controllers/Miner.js");
+var Miner = require("./nodedist/controllers/miner");
 
 var app = express();
 
