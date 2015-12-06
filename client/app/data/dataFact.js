@@ -203,7 +203,7 @@ function dataFact(httpFact, $q, $timeout){
     * Assign a campus it's classes
      */
     function parseCampuses(data, k){
-        console.log(data);
+       // console.log(data);
         for(let j = 0;j<dataF.campuses.length;j++){ 
             if(dataF.campuses[j]._id === data[0].campus){
                 dataF.campuses[j][k] = data;
@@ -217,3 +217,4 @@ function dataFact(httpFact, $q, $timeout){
 
 
 //dataFact.$inject = ["httpFact, $q, $timeout"];
+  

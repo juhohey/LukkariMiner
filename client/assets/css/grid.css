@@ -59,3 +59,11 @@ div[class*='cols']{
 	content: " ";
 	clear: both;
 }
+.schedules-row{
+	width: 2000px;
+}
+.schedules-item{
+	text-align: center;
+	padding: 1rem;
+	font-size: 1rem;
+}

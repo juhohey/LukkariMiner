@@ -1,0 +1,26 @@
+
+    <div class="schedules-table">
+        <div class="row schedules-row">
+            <!-- thead: day names -->
+            <div
+                class="schedules-item cols-sm-1"
+                ng-repeat='d in
+                ["empty", "m","t","w","th","f","sat","sun"]'>
+                {{::d}}
+            </div>
+        </div>
+        <div class="schedules-values">
+            <!-- individual row -->
+            <div class="row schedules-row" ng-repeat="scheduleItem in scheduleVm.scheduleItem.schedule">
+                <!-- time slot -->
+                <div class="schedules-item-time schedules-item cols-sm-1">
+                    {{::scheduleItem.time.text}}
+                </div>
+                <div flex class="schedules-item-value schedules-item cols-sm-1"
+                    ng-repeat="days in scheduleItem.slots" 
+                >
+                     {{::days.text}}
+                </div>
+            </div>
+        </div>
+    </div>
