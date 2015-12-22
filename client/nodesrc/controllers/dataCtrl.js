@@ -41,7 +41,7 @@ let DataCtrl = function () {
      dataCtrl.listClass = function (campus, cb){
 
         let m = decodeURI(campus.toLowerCase())+"_classes";
-        console.log(m, models[m]);
+        //console.log(m, models[m]);
         models[m].find().exec(function(err, dbData){
              if (err) return cb(err);
              else cb(null, dbData);
@@ -58,6 +58,41 @@ let DataCtrl = function () {
              else cb(null, dbData);
          });
      };
+
+    /**
+     * Get shingle schedule: find class id by name, then find week by week number
+     * @param campusName
+     * @param classID
+     * @param weekNum
+     * @param cb
+     */
+    dataCtrl.getScheduleSingle = function (campusName, classID, weekNum, cb){
+
+        //Generate class&week models to get
+        let classToGet = decodeURI(campusName.toLowerCase())+"_classes";
+        let weekToGet = decodeURI(campusName.toLowerCase())+"_weeks";
+        //console.log("getScheduleSingle find class",classToGet,weekToGet,weekNum)
+        //find class
+        models[classToGet].findOne({
+            "name":classID
+        }).exec(function(err, dbData){
+            //return if err/no data found
+            if (err) return cb(err);
+            else if(!dbData) cb("class not found");
+            else {
+                //find week
+               // let ref = new mongoose.Schema.Types.ObjectId(dbData._id);
+                models[weekToGet].findOne({
+                    "class":dbData._id,
+                    "weekNumber":parseInt(weekNum)
+                }).exec(function (err, dbDataWeek) {
+                    //console.log("getScheduleSingle found week",dbDataWeek)
+                    if (err) return cb(err);
+                    else cb(null, dbDataWeek);
+                });
+            }
+        });
+    };
 
      /*
      * Dynamically generate schemas

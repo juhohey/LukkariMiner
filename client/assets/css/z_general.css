@@ -55,6 +55,12 @@
 .font-highlight{
 	color: $color_base;
 }
+.text-center{
+	text-align: center;
+}
+.error{
+	padding:1rem 0;
+}
 
 /* cursor properties */
 .pointer{

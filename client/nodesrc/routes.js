@@ -58,10 +58,18 @@ module.exports = function  (app,express) {
 		},
 		listClass: function(req,res){
 			let type = req.originalUrl.split("/");
-			console.log(type[3])
+			//console.log(type[3])
 			dataCtrl.listClass(type[3], (err, classes)=>{
 				if(err) res.status(400);
 				else res.send(classes)
+			});
+		},
+		getScheduleSingle: function(req,res){
+			let type = req.originalUrl.split("/");
+			console.log(type[3],type[5],type[6])
+			dataCtrl.getScheduleSingle(type[3],type[5],type[6], (err, dbRes)=>{
+				if(err) res.status(400);
+				else res.send(dbRes)
 			});
 		},
 		week:{
@@ -115,13 +123,21 @@ module.exports = function  (app,express) {
 					}
 				},
 				'/classes': {
-					get: datas.listClass
+					get: datas.listClass,
+					'/:classId': {
+						'/:weekNum': {
+							get:datas.getScheduleSingle
+						}
+					}
+
 				}
 
-			}
+
+			} /* /campus name*/
 	   	},
 	   	'/api/class/:classID': {
-				get: datas.listClass,
+
+			get: datas.listClass,
 
 			'/weeks': {
 				get: datas.listClass

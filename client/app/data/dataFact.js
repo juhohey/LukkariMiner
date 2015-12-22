@@ -11,6 +11,12 @@ function dataFact(httpFact, $q, $timeout){
     //this
 	let dataF = {};
 
+    //is this initalized?
+    dataF.init;
+    //2 possibilities
+    //1: .init gets called
+    //2. single schedule gets called
+
     //data we're serving
     dataF.campuses = [];
     dataF.weeks = [];
@@ -32,6 +38,7 @@ function dataFact(httpFact, $q, $timeout){
      * Get campuses data from API
      */
     dataF.init = function(){
+        dataF.init = true;
         console.log("Data factory initialized, getting data")
         httpFact.get("/campus").then((d)=>{
             dataF.campuses = d.data;
@@ -93,9 +100,9 @@ function dataFact(httpFact, $q, $timeout){
      * @param seachModel obj - .weekNumber: .name: 
      */
     dataF.getWeekData = function(seachModel){
-
+        var promise = $q.defer();
         let w = new Date(date).getWeek();
-
+        let target;
         //Weeks = all campuses all weeks
         for(let i = 0;i<dataF.weeks.length;i++){
             //Weeks[i] = all weeks from 1 campus
@@ -105,12 +112,31 @@ function dataFact(httpFact, $q, $timeout){
                 if(dataF.weeks[i][j].class===seachModel.class&&dataF.weeks[i][j].weekNumber===w){
                   // console.log("match!",dataF.weeks[i][j],w);
                     dataF.weeks[i][j].name = seachModel.name;
-                    console.log(dataF.weeks[i]);
-                    return dataF.weeks[i][j];
 
+                    target = dataF.weeks[i][j];
+                    //console.log(target);
+                    break;
                 }
             }
         }
+        //Case where there is no week data
+        if(!target) promise.reject("No schedule found");
+        else {
+            //get campus name
+            dataF.campuses.forEach((el, i, a)=> {
+                    dataF.campuses[i].classes.forEach((eli, j, ar)=> {
+                        //console.log(dataF.campuses[i].classes[j].name,dataF.campuses[i].classes[j]._id,target.class)
+                        // console.log(dataF.campuses[i].classes[j]._id===target.class,dataF.campuses[i].classes[j]._id,target.class)
+                        if (dataF.campuses[i].classes[j]._id === target.class) {
+                            target.campus = dataF.campuses[i].name;
+                            //  console.log(target);
+                            promise.resolve(target);
+                        }
+                    })
+                }
+            );
+        }
+        return promise.promise;
 
     };
 
@@ -134,6 +160,8 @@ function dataFact(httpFact, $q, $timeout){
         });
     };
 
+
+
     /**
      * Return a week schedule
      * Note that we cant return something we don't have -> make sure we have the data first, then parse
@@ -146,6 +174,7 @@ function dataFact(httpFact, $q, $timeout){
 
             let returnVal;
             if(promises.weeks) mainLoop();
+
             else{
                 $timeout(()=>{
                     if(promises.weeks) mainLoop();
@@ -170,32 +199,79 @@ function dataFact(httpFact, $q, $timeout){
                     }
                 }
             }
-
-            function getWeekDataSchedule(){
-               // console.log(dataF.weeks);
-                for(let i = 0;i<dataF.weeks.length;i++){
-                    for(let j = 0;j<dataF.weeks[i].length;j++) {
-                        if (dataF.weeks[i][j].class === currentByState.classId) {
-                            dataF.weeks[i][j].name = currentByState.name;
-                            return dataF.weeks[i][j];
-                        }
-                    }
-                }
-            }
         });
+    };
+    dataF.getSingleSchedule = function(sch){
+        return $q((resolve, reject)=> {
+            console.log(sch)
+            let returnVal;
+            if (promises.weeks) resolve(getWeekDataSchedule(sch));
+            else {
+                httpFact.get("/campus/" +
+                    encodeURI(sch.campus) +
+                    "/classes/" +
+                    sch.class + "/"+
+                    sch.weekNumber
+                ).then((d)=> {
+                    console.log(d);
+                   // dataF.init();
+
+                    resolve(d.data);
+                }).catch((err)=> {
+                    console.log(err)
+                    reject(err);
+                })
+            }
+        })
+
     };
 
     //Private
+
+    /**
+     * Parse week from desired params
+     * @param currentByState:classId,currentByState.name
+     * @returns schedule obj
+     */
+    function getWeekDataSchedule(currentByState){
+
+        getClassData();
+        function getClassData(){
+            for(let i = 0;i< dataF.campuses.length;i++){
+                for(let j = 0;j<dataF.campuses[i].classes.length;j++){
+                    if (dataF.campuses[i].classes[j].name === currentByState.class){
+                        currentByState.classId = dataF.campuses[i].classes[j]._id;
+                        return;
+                    }
+                }
+            }
+        }
+        console.log(currentByState);
+        // console.log(dataF.weeks);
+        for(let i = 0;i<dataF.weeks.length;i++){
+            for(let j = 0;j<dataF.weeks[i].length;j++) {
+                if (dataF.weeks[i][j].class === currentByState.classId) {
+                    dataF.weeks[i][j].name = currentByState.name;
+                    return dataF.weeks[i][j];
+                }
+            }
+        }
+    }
     /*
     * If data not yet loaded resolve, wait a sec, if still not reject
      */
     function checkForStatusReturnPromise(p, data, resolve, reject){
         if(promises[p]) resolve(dataF[data]);
         else{
-            $timeout(()=>{  // console.log(campuses);
-                if(promises[p]) resolve(dataF[data]);
-                else reject("API unavailable at this time, so sorry")
-            },5000)
+            timeOut(0);
+            function timeOut(i){
+                $timeout(()=>{  // console.log(campuses);
+                    if(promises[p]) resolve(dataF[data]);
+                    else if(i<10) timeOut(++i);
+                    else  reject("API unavailable at this time, so sorry");
+                },500)
+            }
+
         }
     }
 
@@ -216,5 +292,4 @@ function dataFact(httpFact, $q, $timeout){
 }
 
 
-//dataFact.$inject = ["httpFact, $q, $timeout"];
-  
+dataFact.$inject = ["httpFact", "$q", "$timeout"];

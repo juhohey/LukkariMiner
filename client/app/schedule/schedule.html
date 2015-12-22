@@ -1,52 +1,38 @@
 <section class="schedules section" ng-controller="scheduleCtrl as scheduleVm">
 
-    <div class="schedules-table">
-        <md-grid-list
-                md-cols-gt-md="{{scheduleVm.dayNum}}" md-cols-sm="{{scheduleVm.dayNum}}" md-cols-md="{{scheduleVm.dayNum}}"
-                md-row-height-gt-md="1:1" md-row-height="1:1"
-                md-gutter-gt-md="16px" md-gutter-gt-sm="8px" md-gutter="4px">
-                <md-grid-tile class="schedules-item-time" md-rowspan="1" md-colspan="1">
-
-                </md-grid-tile>
-                <md-grid-tile class="schedules-item-date" md-rowspan="1" md-colspan="1"  ng-repeat='d in ["m","t","w","th","f","sat","sun"]'>
-                    {{::d}}
-                </md-grid-tile>
-
-        </md-grid-list>
-        <div class="schedules-values" 
-            ng-repeat="scheduleItem in scheduleVm.scheduleItem.schedule">
-
-            <md-grid-list
-                md-cols-gt-md="{{scheduleVm.dayNum}}" md-cols-sm="{{scheduleVm.dayNum}}" md-cols-md="{{scheduleVm.dayNum}}"
-                md-row-height-gt-md="1:1" md-row-height="1:1"
-                md-gutter-gt-md="16px" md-gutter-gt-sm="8px" md-gutter="4px">
-                <!-- individual row -->
-                <!-- time slot -->
-                <md-grid-tile class="schedules-item-time"  md-colspan="1">
-                        {{::scheduleItem.time.text}}
-                </md-grid-tile>
-                <!-- days -->
-
-                <!-- NG-IF: if these have a duration increase row span -->
-                
-                <md-grid-tile 
-                    ng-if="days.duration" 
-                    md-colspan-sm="1"  
-                    ng-repeat="days in scheduleItem.slots"
-                    md-colspan="1"
-                    md-rowspan="{{days.duration}}">
-                    <!--<md-grid-tile-header>
-                        {{::days.day}}
-                    </md-grid-tile-header>-->
-                        {{::days.text}}
-                </md-grid-tile>
-                <md-grid-tile ng-if="!days.reserved"  md-colspan-sm="1"  ng-repeat="days in scheduleItem.slots" md-colspan="1">
-                    <!--<md-grid-tile-header>
-                        {{::days.day}}
-                    </md-grid-tile-header>-->
-                        {{::days.text}}
-                </md-grid-tile>
-            </md-grid-list>
+    <div ng-if="scheduleVm.loading">AAAA
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+    <div ng-if="!scheduleVm.noData" class="schedules-table">
+        <div class="row schedules-row">
+            <!-- thead: day names -->
+            <div
+                    class="schedules-item schedules-item-value"
+                    ng-repeat='d in
+                ["empty", "m","t","w","th","f","sat","sun"]'>
+                {{::d}}
+            </div>
         </div>
+        <div class="schedules-values">
+            <!-- individual row -->
+            <div class="row schedules-row" ng-repeat="scheduleItem in scheduleVm.scheduleItem.schedule">
+                <!-- time slot -->
+                <div class="schedules-item-time schedules-item ">
+                    <p class="schedules-item-time-text">{{::scheduleItem.time.text}}</p>
+                </div>
+                <div ng-repeat="days in scheduleItem.slots"
+                     class="schedules-item-value schedules-item  schedules-item-h-{{::days.duration}}"
+                     ng-class="{'schedules-item-h-n':days.reserved}"
+                >
+                    <p ng-if='days.text!=="<br>"' class="schedules-item-text"
+                       ng-bind-html="::days.text">days.text!='&nbsp;'</p>
+                    <p ng-if='days.text=="<br>"' class="schedules-item-text-none"
+                       ng-bind-html="::days.text"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="scheduleVm.noData">
+        <h2 class="error text-center">No schedule found :(</h2>
     </div>
 </section>

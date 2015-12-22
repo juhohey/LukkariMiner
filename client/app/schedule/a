@@ -1,0 +1,35 @@
+</md-grid-list>
+<div class="schedules-values"
+ng-repeat="scheduleItem in scheduleVm.scheduleItem.schedule">
+
+    <md-grid-list
+md-cols-gt-md="{{scheduleVm.dayNum}}" md-cols-sm="{{scheduleVm.dayNum}}" md-cols-md="{{scheduleVm.dayNum}}"
+md-row-height-gt-md="1:1" md-row-height="1:1"
+md-gutter-gt-md="16px" md-gutter-gt-sm="8px" md-gutter="4px">
+    <!-- individual row -->
+<!-- time slot -->
+<md-grid-tile class="schedules-item-time"  md-colspan="1">
+    {{::scheduleItem.time.text}}
+</md-grid-tile>
+<!-- days -->
+
+<!-- NG-IF: if these have a duration increase row span -->
+
+<md-grid-tile
+ng-if="days.duration"
+    md-colspan-sm="1"
+ng-repeat="days in scheduleItem.slots"
+md-colspan="1"
+md-rowspan="{{days.duration}}">
+    <!--<md-grid-tile-header>
+    {{::days.day}}
+</md-grid-tile-header>-->
+{{::days.text}}
+</md-grid-tile>
+<md-grid-tile ng-if="!days.duration&&!days.reserved"  md-colspan-sm="1"  ng-repeat="days in scheduleItem.slots" md-colspan="1">
+    <!--<md-grid-tile-header>
+    {{::days.day}}
+</md-grid-tile-header>-->
+{{::days.text}}
+</md-grid-tile>
+</md-grid-list>

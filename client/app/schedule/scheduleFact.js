@@ -4,7 +4,7 @@
  */
 angular.module(APPNAME).factory("scheduleFact",scheduleFact);
 
-//scheduleFact.$inject = ["$stateParams, dataFact, $q"];
+scheduleFact.$inject = ["$stateParams", "dataFact", "$q"];
 
 function scheduleFact($stateParams, dataFact, $q){
 
@@ -31,7 +31,8 @@ function scheduleFact($stateParams, dataFact, $q){
      */
     function parseState() {
         currentByState.weekNumber = $stateParams.wn;
-        currentByState.name = $stateParams.cName;
+        currentByState.class = $stateParams.cName;
+        currentByState.campus = $stateParams.campus;
         if(currentByState.weekNumber===activeSchedule.weekNumber&&currentByState.name===activeSchedule.name) complete = true;
 /*        else dataFact.getSchedule(currentByState).then((data)=>{
 
@@ -62,17 +63,25 @@ function scheduleFact($stateParams, dataFact, $q){
             if(complete) resolve(activeSchedule);
 
             else{
-                dataFact.getSchedule(currentByState).then((sch)=>{
+                dataFact.getSingleSchedule(currentByState).then((sch)=>{
+                    console.log("dataFact get schedule res",sch);
+                    schedule.setSchedule(sch);
+                    resolve(sch)
+                }).catch((err)=>{
+                    reject(err);
+                });
+              /*  dataFact.getSchedule(currentByState).then((sch)=>{
                     schedule.setSchedule(sch);
                     resolve(activeSchedule);
                 })
                 .catch((err)=>{
                     resolve(err)
-                })
+                })*/
             }
         })
 
     };
+
 
 
 	return schedule;

@@ -185,7 +185,7 @@ let weekFact = function( ) {
                 console.log(schedule[i].slots);
             };
         }
-        testWeek();
+        //testWeek();
 
         return weekObject;
 

@@ -9,16 +9,17 @@
   	<!-- endinject -->
   	<!-- libCss:css -->
   	<!-- endinject -->
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
 	
 </head>
 <body ng-app="lukkari">
 	<header class="header">
-		<div class="header-bar">
-			<h1>AppName</h1>
+		<div class=d"sheader-bar">
+			<h1 ui-sref="find">AppaName</h1>
 		</div>
 		<!-- ng-repeat link in links -->
-		<div class="row">
-			<div class="col cols-4 cols-sm-4 header-bar-item">
+		<div class="row header-row">
+			<div ui-sref="find" class="col cols-4 cols-sm-4 header-bar-item">
 				<span>Find</span>
 			</div>
 			<div class="col cols-4 cols-sm-4 header-bar-item">
@@ -34,9 +35,6 @@
 	</div>
 	<!-- lib:js -->
  	<!-- endinject -->
-	<script src="/lib/angular-material.js"></script>
-	<script src="/lib/angular-animate.min.js"></script>
-	<script src="/lib/angular-aria.min.js"></script>
 	<!-- inject:js --> 
 	<!-- endinject -->
 </body>

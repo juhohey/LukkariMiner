@@ -16,9 +16,10 @@ $color_white_1: #f9f9f9;
 $color_white_2: #eee;
 $color_white_3: #e9e9e9;
 
-$color_black_1: #444;
-$color_black_2: #666;
-$color_black_3: #090909;
+$color_black_1: #090909;
+$color_black_2: #444;
+$color_black_3: #666;
+$color_black_4: #eee;
 
 
 /*
@@ -26,7 +27,7 @@ $color_black_3: #090909;
 */
 
 /* size */
-$font_size_3: 1.8rem;
+$font_size_3: 1.6rem;
 $font_size_2: 1.4rem;
 $font_size_1: 1.2rem;
 $font_size_05: 1.15rem;
@@ -50,12 +51,12 @@ $res_handheld: 450px;
 $box_shadow_1: 1px 1px 1px rgba(0,0,0,0.06),-1px -1px 1px rgba(0,0,0,0.12);
 
 
-/*	
+/*
 *Column
 */
 $col_padding:1rem;
 $container_width: 1175px;
-$container_ratio: 0.8;  
+$container_ratio: 0.8;
 
 
 
@@ -63,10 +64,10 @@ $container_ratio: 0.8;
 
 
 
-/* 
+/*
 $resLarge: 1200px;
 $resMid: 1000px;
-$resBreak: 768px; 
+$resBreak: 768px;
 
 
 
@@ -75,15 +76,15 @@ $fontSizeBigger:1.2rem;
 $fontSizeBigger2:1.4rem;
 $fontSizeBig:1.8rem;
 
-$fontSizeSmall:0.8rem; 
- 
+$fontSizeSmall:0.8rem;
+
 $colorLight1: #f8f8f8;
-$colorLight2: #eee;   
+$colorLight2: #eee;
 $colorMid1: #666;
 $colorDark1: #222;
-$colorDark2: #090909;   
+$colorDark2: #090909;
 $tomato:tomato;
 
-$colorFont: #333; 
+$colorFont: #333;
 
 $boxS1:1px 1px 1px rgba(0,0,0,0.2),-1px -1px 1px rgba(0,0,0,0.1); */

@@ -8,9 +8,9 @@ function states ($stateProvider, $urlRouterProvider){
 	"use strict";
 	$urlRouterProvider.otherwise("find");
 	var route = "";
-	$stateProvider
+	$stateProvider 
 	.state("find",{
-	 	url:"/find",
+	 	url:"/find", 
 	 	templateUrl: "/app/find/find.html"
 	}) 
 	.state("schedule",{
@@ -19,7 +19,7 @@ function states ($stateProvider, $urlRouterProvider){
 	})
 		.state("schedule.campus",{
 			url:route+"/:campus",
-			templateUrl: "/app/schedule/schedule.html"
+			templateUrl: "/app/schedule/schedule.html" 
 		})
 			.state("schedule.class",{
 				url:route+"/:cName",
@@ -30,4 +30,12 @@ function states ($stateProvider, $urlRouterProvider){
 					templateUrl:"/app/schedule/schedule.html"
 				})
 
+			.state("schedule.campus.class",{
+				url:route+"/:cName",
+				templateUrl: "/app/schedule/schedule.html"
+			})
+				.state("schedule.campus.class.week",{
+					url:route+"/:wn",
+					templateUrl: "/app/schedule/schedule.html"
+				})
 }

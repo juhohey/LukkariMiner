@@ -10,8 +10,8 @@
 html,body{
 	font-size: $font_size_body;
 	color: $color_black_1;
-	font-family:helvetica, sans-serif;
 	background-color: $color_white_1;
+	font-family:Roboto, sans-serif;
 }
 h1,h2,h3{
 	margin-bottom: 1rem;
